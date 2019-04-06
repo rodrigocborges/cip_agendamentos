@@ -1,30 +1,32 @@
-<h1> Visualizando agendamentos</h1>
-<p><a href="?">Voltar</a></p>
-<table>
-<tr>
-    <th>Local</th>
-    <th>Data</th>
-    <th>Horário inicio</th>
-    <th>Horário fim</th>
-    <th>Professor</th>
-    <th>Ação</th>
-</tr>
+<h1>Agendamentos</h1>
 <?php
     $pdo = new Connection("localhost", "cip", "root", "");
     $conn = $pdo->getConnection();
+
+    if(isset($_GET["del_id"])){
+      $id = $_GET["del_id"];
+      $del = $conn->prepare("DELETE FROM diary WHERE id = ?");
+      $del->bindParam(1, $id);
+      $del->execute();
+      header("Location: ?pg=page_view");
+    }
+
     $select = $conn->prepare("SELECT * FROM diary ORDER BY id DESC");
     $select->execute();
     while($qr = $select->fetch(PDO::FETCH_OBJ)){
+        $type = ($qr->type == 0) ? "Laboratório" : "Sala de reunião";
+        $d = date("d/m/Y", strtotime($qr->date));
+        $start = $qr->start;
+        $end = $qr->end;
+        $teacher = $qr->teacher;
 ?>
-<tr>
-<td><?php if($qr->type == 0) { echo "Laboratório"; } else { echo "Sala de reunião"; }?></td>
-<td><?php echo date("d/m/Y", strtotime($qr->date)); ?></td>
-<td><?php echo $qr->start; ?></td>
-<td><?php echo $qr->end; ?></td>
-<td><?php echo $qr->teacher; ?></td>
-<td><a href="?<?php echo $_SERVER["QUERY_STRING"]; ?>&del_id=<?php echo $qr->id; ?>">Deletar</a></td>
-</tr>
+<div class="box">
+<p><?php echo $type; ?></p>
+<p><?php echo $d; ?></p>
+<p><?php echo $start; ?> - <?php echo $end; ?></p>
+<p><?php echo $teacher; ?></p>
+<p><a class="btn" href="?<?php echo $_SERVER["QUERY_STRING"]; ?>&del_id=<?php echo $qr->id; ?>">Deletar</a></td></p>
+</div>
 <?php
     }
 ?>
-</table>

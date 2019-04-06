@@ -1,5 +1,5 @@
-<?php 
-    include("src/connection_class.php"); 
+<?php
+    include("src/connection_class.php");
 ?>
 
 <!DOCTYPE html>
@@ -15,13 +15,14 @@
 
 <main>
     <header>
-        <img src="img/banner.png" alt="">
+        <img src="img/logo.png" alt="">
     </header>
     <article>
         <?php
             if(isset($_GET["pg"])){
                 $pg = $_GET["pg"];
                 if(is_file("src/".$pg.".php")){
+                    echo '<p><a class="btn "href="?">Voltar</a></p>';
                     include("src/".$pg.".php");
                 }else {
                     include("src/page_home.php");
@@ -32,6 +33,6 @@
         ?>
     </article>
 </main>
-    
+
 </body>
 </html>

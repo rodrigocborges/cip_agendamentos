@@ -7,12 +7,43 @@ body {
     color: #333;
 }
 
+h1 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.btn {
+  display: grid;
+  text-decoration: none;
+  padding: 10px;
+  background: #0099CC;
+  color: #fff;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.btn:hover {
+  background: #FFCC00;
+}
+
+.box {
+  display: inline-grid;
+  width: 160px;
+  background: #BBEEFF;
+  border-radius: 5px;
+  color: #000;
+}
+
+.box p:first-of-type {
+  font-weight: bold;
+}
+
 main {
     display: grid;
     grid-template-areas: ". header header ."
                          ". article article .";
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 250px auto;
+    grid-template-rows: 150px auto;
 }
 
 table th {
@@ -44,9 +75,14 @@ article form input, select{
 }
 
 article form input[type=submit]{
-    background: #2873ed;
+    background: #0099CC;
     color: #fff;
     font-weight: bold;
     width: 90px;
     border: 0;
+    padding: 10px;
+}
+
+article form input[type="submit"]:hover {
+  background: #FFCC00;
 }

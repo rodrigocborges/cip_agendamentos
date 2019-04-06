@@ -6,7 +6,7 @@
     <input type="text" name="teacher" placeholder="Nome do professor/servidor" required>
     <select name="type">
         <option value="0">Laboratório</option>
-        <option value="0">Sala de reunião</option>
+        <option value="1">Sala de reunião</option>
     </select>
     <input type="submit" name="submit" value="Inserir">
 
@@ -22,8 +22,8 @@
         $insert->bindParam(2, $_POST["date"], PDO::PARAM_STR);
         $insert->bindParam(3, $_POST["start"], PDO::PARAM_STR);
         $insert->bindParam(4, $_POST["end"], PDO::PARAM_STR);
-        $insert->bindParam(5, $_POST["teacher"], PDO::PARAM_STR);      
-        $insert->execute(); 
+        $insert->bindParam(5, $_POST["teacher"], PDO::PARAM_STR);
+        $insert->execute();
     }
 
 ?>
